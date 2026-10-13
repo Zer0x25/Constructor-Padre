@@ -66,3 +66,13 @@ Registro de decisiones sobre **cómo se construye y organiza el molde Spring-0**
 - **Contexto:** Spring-0 arrastraba constructivos de versión (`specs/seed-*.md`, `docs/seed-upgrades.md`) y la identidad del repo viejo ("Hito-0"), que son de la construcción, no del molde que se entrega a derivados.
 - **Decisión (4 pasos, cada uno con gate verde 97/97):** (1) desacoplar el gate de `docs/seed-upgrades.md` (`5ce4b15`); (2) borrar 16 specs seed + seed-upgrades, limpiar refs, conservar `harness-metrics.md` (funcionalidad) e `docs/history/` (historia) (`81cddb6`); (3) identidad agnóstica — ancla AGENTS `## Estado inicial` + piloto en la misma pasada, quitar "(antes Hito-0)", conservar "Hito 0" solo como fase del flujo (`9611a60`, `d7ec60b`, `3574d02`); (4) `.gitignore` propio del padre (ruido del constructor, NO Spring-0) + submódulo apuntando al molde higienizado.
 - **Consecuencias:** Spring-0 = molde limpio y agnóstico (V5.6-higienizada, 5 commits sobre el tag). El constructor mantiene su gobernanza en DECISIONES/ESTADO. La separación constructor↔molde quedó materializada en ambos repos. Pendiente: push de ambos a GitHub y la declaración de padre en el gate de Spring-0.
+
+---
+
+## D-007 — Fase `mold`: el molde se gobierna como padre, no como derivado
+
+- **Fecha:** 2026-10-13
+- **Estado:** aceptada e implementada (TDD), pusheada
+- **Contexto:** tras la higienización V1, Spring-0 seguía en `phase=seed` — un estado de derivado ("a punto de nacer") que conceptualmente mentía: el molde no es un derivado. El gate ramificaba por fases de derivado y le exigía tratar el molde como semilla.
+- **Decisión (TDD rojo→verde):** nueva fase `mold` en el gate. 6 tests nuevos en `verify-contract.sh` (rojo confirmado, luego verde): `mold` pasa sin verificador de producto, no corre scope-lock, corre el contrato pero no el piloto (ensayo del ciclo `seed`), no exige claves de producto, y un governance file faltante sí bloquea. Implementada en las 3 piezas del gate (`verify-structure.sh` ramifica a archivos del molde; `verify.sh` corre contrato sin piloto/scope-lock/verify-project; `verify-scope.sh` → exit 0 por defensa en profundidad). `project-profile.conf` → `phase=mold`; STATE/AGENTS/README documentan la fase. ADR 0006 intacto (su transición `seed→initializing→project` es del derivado, no del molde).
+- **Consecuencias:** el molde se declara padre y el gate lo trata como tal — le exige los archivos del molde, no los de producto. Contrato 97 → **103 passed, 0 failed**. Commit `bb4c02f`. La distinción conceptual derivado↔molde quedó materializada en el gate, no solo en documentos.

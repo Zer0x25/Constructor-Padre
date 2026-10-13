@@ -15,10 +15,9 @@
 
 - [x] Crear Constructor-Padre y registrar la separación (D-001, D-002).
 - [x] Crear Spring-0 y migrar V5.6 tal cual (opción B).
-- [x] **Higienización V1 completada** (D-006): Spring-0 = molde limpio sin constructivos de versión ni identidad de Hito-0; Constructor-Padre = repo constructor con `.gitignore` propio y submódulo apuntando al molde higienizado (`3574d02`).
-- [ ] **Push de la higienización a GitHub** (Spring-0 + Constructor-Padre) — pendiente de autorización.
-- [ ] Resolver la declaración de padre en el gate de Spring-0 (hoy vive en `phase=seed`, estado de derivado).
-- [ ] Verificar que los derivados futuros se generen desde Spring-0 (no desde Hito-0 congelado).
+- [x] **Higienización V1 completada** (D-006): Spring-0 = molde limpio sin constructivos de versión ni identidad de Hito-0; Constructor-Padre = repo constructor con `.gitignore` propio y submódulo apuntando al molde higienizado.
+- [x] **Declaración de padre en el gate** (D-007, TDD): Spring-0 corre en `phase=mold`; el gate lo trata como padre (archivos del molde, sin scope-lock ni verificador de producto). Contrato 103/103. Pusheado (`bb4c02f`, puntero del submódulo `1114d6b`).
+- [ ] Verificar que los derivados futuros se generen desde Spring-0 (no desde Hito-0 congelado) y que arranquen en `seed`.
 
 ## Fricciones conocidas a resolver en la mejora (del análisis previo)
 
