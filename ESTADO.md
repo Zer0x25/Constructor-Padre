@@ -7,8 +7,8 @@
 ## Situación
 
 - **Hito-0** (repo original): congelado, intacto, V5.6 (`0e683dd`). Seguro histórico — no se toca.
-- **Spring-0** (molde): https://github.com/Zer0x25/Spring-0 — vivo, funcional, tag `v5.6.0`. Local: `~/Escritorio/Proyects/Spring-0`.
-- **Constructor-Padre** (este): https://github.com/Zer0x25/Constructor-Padre — gobierna la construcción de Spring-0.
+- **Spring-0** (molde): repo independiente en GitHub (funciona como template), **submódulo** de este repo en `Constructor-Padre/Spring-0/`. Vivo, funcional, tag `v5.6.0` (`bb387bf`), con su propio historial git.
+- **Constructor-Padre** (este): gobierna la construcción de Spring-0. Spring-0 vive dentro como submódulo.
 
 ## Pendiente
 

@@ -46,3 +46,13 @@ Registro de decisiones sobre **cómo se construye y organiza el molde Spring-0**
 - **Contexto:** el piloto (`bootstrap-pilot.sh` L77) tiene incrustado el literal `## Estado inicial: semilla Hito 0` en su `sed`; cambiar ese encabezado en AGENTS rompe el matcheo y pone el gate en rojo.
 - **Decisión:** en la migración se actualizó la identidad viva de Spring-0 en el **cuerpo** de AGENTS (L3) y README/STATE, pero se **preservó literal** el encabezado `## Estado inicial: semilla Hito 0` por ser ancla mecánica. Su cambio queda como parte de la mejora de gobernanza futura, donde se actualizará el piloto en la misma pasada.
 - **Consecuencias:** la migración no tocó el gate ni sus anclas; el gate siguió verde. La ancla "Hito 0" sobrevive en un archivo dentro de Spring-0 como deuda conocida y documentada, no como accidente.
+
+---
+
+## D-005 — Spring-0 vive como submódulo dentro del padre
+
+- **Fecha:** 2026-10-13
+- **Estado:** aceptada e implementada
+- **Contexto:** Spring-0 se creó primero como repo hermano (local `~/Escritorio/Proyects/Spring-0`), pero el diseño correcto es que el molde viva **dentro** de Constructor-Padre, conservando su independencia.
+- **Decisión:** en GitHub son **dos repos independientes** (Constructor-Padre = gobernanza del constructor; Spring-0 = molde, funciona como template para derivados). **Localmente Spring-0 es un submódulo** de Constructor-Padre: vive en `Constructor-Padre/Spring-0/`, con su propio historial git y su propio remoto. No se fusionó ni se eliminó nada.
+- **Consecuencias:** `git clone --recurse-submodules` del padre trae el molde; trabajar en el molde se hace dentro de `Constructor-Padre/Spring-0/` con su propio git/remoto. El submódulo quedó registrado apuntando a `bb387bf` (tag `v5.6.0`) — historial intacto. Spring-0 conserva su repo en GitHub como template.
