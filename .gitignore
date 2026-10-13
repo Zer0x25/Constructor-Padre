@@ -1,0 +1,8 @@
+# Temporales y salidas de gate del constructor (no del molde)
+*.log
+*.done
+verify-contract/
+tmp/
+scratch/
+
+# NO ignorar Spring-0/ — es submódulo (ver .gitmodules), el padre guarda su puntero.

@@ -56,3 +56,13 @@ Registro de decisiones sobre **cómo se construye y organiza el molde Spring-0**
 - **Contexto:** Spring-0 se creó primero como repo hermano (local `~/Escritorio/Proyects/Spring-0`), pero el diseño correcto es que el molde viva **dentro** de Constructor-Padre, conservando su independencia.
 - **Decisión:** en GitHub son **dos repos independientes** (Constructor-Padre = gobernanza del constructor; Spring-0 = molde, funciona como template para derivados). **Localmente Spring-0 es un submódulo** de Constructor-Padre: vive en `Constructor-Padre/Spring-0/`, con su propio historial git y su propio remoto. No se fusionó ni se eliminó nada.
 - **Consecuencias:** `git clone --recurse-submodules` del padre trae el molde; trabajar en el molde se hace dentro de `Constructor-Padre/Spring-0/` con su propio git/remoto. El submódulo quedó registrado apuntando a `bb387bf` (tag `v5.6.0`) — historial intacto. Spring-0 conserva su repo en GitHub como template.
+
+---
+
+## D-006 — Higienización V1: molde limpio sin constructivos ni identidad de Hito-0
+
+- **Fecha:** 2026-10-13
+- **Estado:** aceptada e implementada (opción A), sin push aún
+- **Contexto:** Spring-0 arrastraba constructivos de versión (`specs/seed-*.md`, `docs/seed-upgrades.md`) y la identidad del repo viejo ("Hito-0"), que son de la construcción, no del molde que se entrega a derivados.
+- **Decisión (4 pasos, cada uno con gate verde 97/97):** (1) desacoplar el gate de `docs/seed-upgrades.md` (`5ce4b15`); (2) borrar 16 specs seed + seed-upgrades, limpiar refs, conservar `harness-metrics.md` (funcionalidad) e `docs/history/` (historia) (`81cddb6`); (3) identidad agnóstica — ancla AGENTS `## Estado inicial` + piloto en la misma pasada, quitar "(antes Hito-0)", conservar "Hito 0" solo como fase del flujo (`9611a60`, `d7ec60b`, `3574d02`); (4) `.gitignore` propio del padre (ruido del constructor, NO Spring-0) + submódulo apuntando al molde higienizado.
+- **Consecuencias:** Spring-0 = molde limpio y agnóstico (V5.6-higienizada, 5 commits sobre el tag). El constructor mantiene su gobernanza en DECISIONES/ESTADO. La separación constructor↔molde quedó materializada en ambos repos. Pendiente: push de ambos a GitHub y la declaración de padre en el gate de Spring-0.

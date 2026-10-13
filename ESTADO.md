@@ -2,6 +2,7 @@
 
 ## Última acción
 
+- **2026-10-13 — Higienización V1 de ambos repos completada (D-006).** Spring-0 pasó a molde limpio en 5 commits (`5ce4b15`..`3574d02`): gate desacoplado de constructivos, borradas 16 specs seed + seed-upgrades, identidad agnóstica (sin "Hito-0"), enseñanza de evolución reapuntada al Constructor-Padre. Gate verde en cada paso: 97/97. Constructor-Padre ganó `.gitignore` propio y su submódulo ahora apunta al molde higienizado (`3574d02`). Pendiente: push de ambos a GitHub.
 - **2026-10-12 — Migración V5.6 a Spring-0 completada.** Creado `Spring-0` (repo fresco, sin historial), migrado el estado V5.6 de Hito-0 **1:1 byte a byte** (verificado con `diff -rq`, idéntico salvo `.git`). Commit raíz `bb387bf`, tag `v5.6.0`, pusheado a `main`. **Gate verde en el repo migrado: contrato 97/97, exit 0.** Identidad viva actualizada a Spring-0 en README/STATE/AGENTS; la historia (16 specs seed-*, ADR 0000–0006) se preservó literal como documento del molde.
 
 ## Situación
@@ -14,8 +15,9 @@
 
 - [x] Crear Constructor-Padre y registrar la separación (D-001, D-002).
 - [x] Crear Spring-0 y migrar V5.6 tal cual (opción B).
-- [ ] **Resolver la declaración de padre en Spring-0:** el gate sigue ramificando por fases de derivado (`seed`/`initializing`/`project`) y Spring-0 vive en `phase=seed` — un estado que conceptualmente miente ("derivado a punto de nacer"). Decidir si Spring-0 se declara explícitamente padre (fase nueva tipo `mold`, o fuera del ciclo) — requiere tocar su gate, ahora sobre repo fresco y sin historial que defender.
-- [ ] Limpieza de gobernanza: las `specs/seed-*` son construcción del molde; en la separación deberían dejar de ser "la unidad de trabajo" del molde (la construcción se decide en el padre).
+- [x] **Higienización V1 completada** (D-006): Spring-0 = molde limpio sin constructivos de versión ni identidad de Hito-0; Constructor-Padre = repo constructor con `.gitignore` propio y submódulo apuntando al molde higienizado (`3574d02`).
+- [ ] **Push de la higienización a GitHub** (Spring-0 + Constructor-Padre) — pendiente de autorización.
+- [ ] Resolver la declaración de padre en el gate de Spring-0 (hoy vive en `phase=seed`, estado de derivado).
 - [ ] Verificar que los derivados futuros se generen desde Spring-0 (no desde Hito-0 congelado).
 
 ## Fricciones conocidas a resolver en la mejora (del análisis previo)
