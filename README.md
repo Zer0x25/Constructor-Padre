@@ -35,4 +35,20 @@ Construir el molde dentro del propio molde creaba confusión: el gate del molde 
 
 ## Estado
 
-Molde Spring-0 congelado en su repositorio original (Hito-0) en V5.6, funcional. La migración hacia Spring-0 (repo fresco, sin historial) se hace desde aquí cuando el padre esté listo. Ver `ESTADO.md`.
+Spring-0 es el molde vivo, migrado desde Hito-0 y mantenido como submódulo. D-008/D-009 incorporan derivación explícita, cierre verificable y pendientes trazables; contrato 139/139 y distribución comprobada. El repositorio original Hito-0 permanece como archivo histórico. Ver `ESTADO.md` para el checkpoint de entrega.
+
+## Validar la distribución
+
+```sh
+./scripts/verify-distribution.sh
+```
+
+Verifica el gate del molde, destinos seguros y repetición del preparador, y exporta una copia temporal en `seed`. Su gate ensaya inicialización, dos interrupciones/recuperaciones, sellado y unidades con spec y registro ligero. Usa la plantilla real y una base Git temporal para comprobar alcance. Limpia las copias al salir, sin red ni instalación de dependencias. La CI del padre ejecuta el mismo comando.
+
+Para crear un proyecto local independiente:
+
+```sh
+./Spring-0/scripts/prepare-derivative.sh /ruta/nuevo-proyecto
+```
+
+El padre del destino debe existir. El preparador conserva el molde, registra procedencia y no crea commits ni configura remotos.
